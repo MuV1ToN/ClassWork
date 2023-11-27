@@ -1,0 +1,69 @@
+﻿<Window x:Class="WpfApp4.Jurnal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp4"
+        mc:Ignorable="d"
+        Title="Jurnal" Height="350" Width="550">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Учебный год:"/>
+                <ComboBox x:Name="Gr2" Height="30" Width="100" SelectionChanged="Gr2_SelectionChanged" Loaded="Gr_jurnal_Loaded">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding StartYear}"/>
+                                <TextBlock Text="-"/>
+                                <TextBlock Text="{Binding EndYear}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Дисцеплина:"/>
+                <ComboBox x:Name="Gr3" Height=" 30" Width="100" SelectionChanged="Gr3_SelectionChanged" Loaded="Gr_jurnal_Loaded">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                               
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Группа:"/>
+                <ComboBox x:Name="Gr1" Height=" 30" Width="100" SelectionChanged="Gr1_SelectionChanged" Loaded="Gr_jurnal_Loaded">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock  Text="{Binding Years}"/>
+                                <TextBlock  Text="-" />
+                                <TextBlock Text="{Binding SubGroup}"/>
+
+                                <TextBlock Text="{Binding Literal}" />
+
+                                <TextBlock  Text="{Binding CountClass}"/>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+            </StackPanel>
+
+            <DataGrid x:Name="PersonsDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" 
+                      ColumnWidth="*" CanUserAddRows="False" CanUserReorderColumns="False" Height="247" Width="496">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding People.SecondName}" />
+                    <DataGridTextColumn Header="Имя" Binding="{Binding People.Name}" />
+                    <DataGridTextColumn Header="Отчество" Binding="{Binding People.MidleName}" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+    </Grid>
+</Window>

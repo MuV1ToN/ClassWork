@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c1554de5abb74e54a9acc7b34e7b596b" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="Model.AcademicYear" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Model.Group" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="Model.People" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="Model.ROLE" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="7.5" PointY="2.25" />
+        <EntityTypeShape EntityType="Model.Teacher" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="Model.AcademicLoad" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Discipline" Width="1.5" PointX="0.75" PointY="8.75" />
+        <AssociationConnector Association="Model.FK_Student_Group" />
+        <AssociationConnector Association="Model.FK_People_User" />
+        <AssociationConnector Association="Model.FK_Student_People" />
+        <AssociationConnector Association="Model.FK_Teacher_People" />
+        <AssociationConnector Association="Model.USER_ROLE" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
