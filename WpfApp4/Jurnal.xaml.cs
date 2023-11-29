@@ -40,12 +40,10 @@ namespace WpfApp4
             Gr2.SelectedItem = year;
 
             Gr3.ItemsSource = Singletone.DB.Discipline.ToList();
-       
-
-             
 
 
         }
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Singletone.DB.SaveChanges();
@@ -55,24 +53,52 @@ namespace WpfApp4
 
         private void Gr1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Logic();
             Group chousegroup = Gr1.SelectedItem as Group;
             People people = Gr1.SelectedItem as People;
             if (chousegroup == null) return;
 
-            PersonsDataGrid.ItemsSource = chousegroup.Student;
+            PersonsDataGrid.ItemsSource = chousegroup.Student.ToList();
+            Singletone.DB.SaveChanges();
             
         }
 
         private void Gr2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Gr1.SelectedItem = null;
+            PersonsDataGrid.SelectedItem = null;
+            Gr3.SelectedItem = null;
+            Logic();
 
         }
 
         private void Gr3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
+            Logic();
+        }
 
+        public void Logic()
+        {
+            if (Gr1.SelectedItem != null)
+            {
+                AcademicYear Year = Gr3.SelectedItem as AcademicYear;
+
+                Gr1.SelectedItem = Singletone.DB.AcademicLoad.Where(n => n.AcademicYearID == Year.ID).Select(n => n.DisciplinID).Distinct().ToList();
+                Gr2.SelectedItem = Singletone.DB.AcademicLoad.Where(n => n.AcademicYearID == Year.ID).Select(n => n.GroupID).Distinct().ToList();
+                Gr3.SelectedItem = Singletone.DB.AcademicLoad.Select(n => n.AcademicYearID).Distinct().ToList();
+
+                if(Gr1.SelectedItem != null)
+                {
+                    Group group = Gr1.SelectedItem as Group;
+                    Gr3.ItemsSource = Singletone.DB.AcademicLoad.Where(n => n.AcademicYearID == Year.ID && n.GroupID == group.ID).Select(n => n.DisciplinID).Distinct().ToList();
+                }
+                if(Gr3.SelectedItem != null)
+                {
+                    Discipline discipline = Gr3.SelectedItem as Discipline;
+                    Gr1.ItemsSource = Singletone.DB.AcademicLoad.Where(n => n.AcademicYearID == Year.ID && n.DisciplinID == discipline.ID).Select(n => n.GroupID).Distinct().ToList();
+                }
+            }
         }
     }
 }
