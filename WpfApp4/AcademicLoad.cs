@@ -15,10 +15,15 @@ namespace WpfApp4
     public partial class AcademicLoad
     {
         public decimal ID { get; set; }
-        public Nullable<decimal> DisciplinID { get; set; }
-        public Nullable<decimal> GroupID { get; set; }
-        public Nullable<decimal> TeacherID { get; set; }
-        public Nullable<decimal> AcademicYearID { get; set; }
-        public Nullable<decimal> Semester { get; set; }
+        public decimal DisciplinID { get; set; }
+        public decimal GroupID { get; set; }
+        public decimal TeacherID { get; set; }
+        public decimal AcademicYearID { get; set; }
+        public decimal Semester { get; set; }
+    
+        public virtual Discipline Discipline { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual Teacher Teacher { get; set; }
+        public virtual AcademicYear AcademicYear { get; set; }
     }
 }

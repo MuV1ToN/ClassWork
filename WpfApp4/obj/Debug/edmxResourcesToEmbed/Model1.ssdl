@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "22-1П11-412-02.dbo.AcademicLoad" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
   <EntityType Name="AcademicLoad">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DisciplinID" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="GroupID" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="TeacherID" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="AcademicYearID" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="Semester" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="DisciplinID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="GroupID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TeacherID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="AcademicYearID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Semester" Type="numeric" Precision="18" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="AcademicYear">
     <Key>
@@ -21,8 +19,6 @@
     <Property Name="StartYear" Type="numeric" Precision="4" Scale="0" />
     <Property Name="EndYear" Type="numeric" Precision="4" Scale="0" />
   </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "22-1П11-412-02.dbo.Discipline" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
   <EntityType Name="Discipline">
     <Key>
       <PropertyRef Name="ID" />
@@ -89,6 +85,54 @@
     <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="RoleID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
   </EntityType>
+  <Association Name="FK_AcademicLoad_AcademicYear">
+    <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="1" />
+    <End Role="AcademicLoad" Type="Self.AcademicLoad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AcademicYear">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AcademicLoad">
+        <PropertyRef Name="AcademicYearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcademicLoad_Discipline">
+    <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+    <End Role="AcademicLoad" Type="Self.AcademicLoad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discipline">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AcademicLoad">
+        <PropertyRef Name="DisciplinID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcademicLoad_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="AcademicLoad" Type="Self.AcademicLoad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AcademicLoad">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcademicLoad_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="AcademicLoad" Type="Self.AcademicLoad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AcademicLoad">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_People_User">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="People" Type="Self.People" Multiplicity="*" />
@@ -162,35 +206,37 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Хранилище ModelContainer">
+    <EntitySet Name="AcademicLoad" EntityType="Self.AcademicLoad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AcademicLoad" EntityType="Self.AcademicLoad" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [AcademicLoad].[ID] AS [ID], 
-    [AcademicLoad].[DisciplinID] AS [DisciplinID], 
-    [AcademicLoad].[GroupID] AS [GroupID], 
-    [AcademicLoad].[TeacherID] AS [TeacherID], 
-    [AcademicLoad].[AcademicYearID] AS [AcademicYearID], 
-    [AcademicLoad].[Semester] AS [Semester]
-    FROM [dbo].[AcademicLoad] AS [AcademicLoad]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Discipline" EntityType="Self.Discipline" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Discipline].[ID] AS [ID], 
-    [Discipline].[Name] AS [Name]
-    FROM [dbo].[Discipline] AS [Discipline]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [USER_ROLE].[UserLogin] AS [UserLogin], 
     [USER_ROLE].[RoleID] AS [RoleID]
     FROM [dbo].[USER_ROLE] AS [USER_ROLE]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_AcademicLoad_AcademicYear" Association="Self.FK_AcademicLoad_AcademicYear">
+      <End Role="AcademicYear" EntitySet="AcademicYear" />
+      <End Role="AcademicLoad" EntitySet="AcademicLoad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcademicLoad_Discipline" Association="Self.FK_AcademicLoad_Discipline">
+      <End Role="Discipline" EntitySet="Discipline" />
+      <End Role="AcademicLoad" EntitySet="AcademicLoad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcademicLoad_Group" Association="Self.FK_AcademicLoad_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="AcademicLoad" EntitySet="AcademicLoad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcademicLoad_Teacher" Association="Self.FK_AcademicLoad_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="AcademicLoad" EntitySet="AcademicLoad" />
+    </AssociationSet>
     <AssociationSet Name="FK_People_User" Association="Self.FK_People_User">
       <End Role="User" EntitySet="User" />
       <End Role="People" EntitySet="People" />

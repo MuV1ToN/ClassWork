@@ -14,9 +14,17 @@ namespace WpfApp4
     
     public partial class Teacher
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Teacher()
+        {
+            this.AcademicLoad = new HashSet<AcademicLoad>();
+        }
+    
         public decimal ID { get; set; }
         public decimal PeopleID { get; set; }
     
         public virtual People People { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AcademicLoad> AcademicLoad { get; set; }
     }
 }

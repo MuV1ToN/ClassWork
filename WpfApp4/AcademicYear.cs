@@ -14,8 +14,17 @@ namespace WpfApp4
     
     public partial class AcademicYear
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AcademicYear()
+        {
+            this.AcademicLoad = new HashSet<AcademicLoad>();
+        }
+    
         public decimal ID { get; set; }
         public Nullable<decimal> StartYear { get; set; }
         public Nullable<decimal> EndYear { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AcademicLoad> AcademicLoad { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace WpfApp4
         public Group()
         {
             this.Student = new HashSet<Student>();
+            this.AcademicLoad = new HashSet<AcademicLoad>();
         }
     
         public decimal ID { get; set; }
@@ -28,5 +29,7 @@ namespace WpfApp4
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AcademicLoad> AcademicLoad { get; set; }
     }
 }

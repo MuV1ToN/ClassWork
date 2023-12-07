@@ -11,7 +11,7 @@
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="Учебный год:"/>
-                <ComboBox x:Name="Gr2" Height="30" Width="100" SelectionChanged="Gr2_SelectionChanged" Loaded="Gr_jurnal_Loaded">
+                <ComboBox x:Name="Years" Height="30" Width="100" SelectionChanged="Years_SelectionChanged" Loaded="Gr_jurnal_Loaded">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -23,18 +23,11 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Content="Дисцеплина:"/>
-                <ComboBox x:Name="Gr3" Height=" 30" Width="100" SelectionChanged="Gr3_SelectionChanged" Loaded="Gr_jurnal_Loaded">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}"/>
-                               
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                <ComboBox x:Name="Discipline" DisplayMemberPath="Name" Height=" 30" Width="100" SelectionChanged="Discipline_SelectionChanged" Loaded="Gr_jurnal_Loaded">
+                    
                 </ComboBox>
                 <Label Content="Группа:"/>
-                <ComboBox x:Name="Gr1" Height=" 30" Width="100" SelectionChanged="Gr1_SelectionChanged" Loaded="Gr_jurnal_Loaded">
+                <ComboBox x:Name="Groups" Height=" 30" Width="100" SelectionChanged="Groups_SelectionChanged" Loaded="Gr_jurnal_Loaded">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
